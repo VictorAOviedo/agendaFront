@@ -10,7 +10,83 @@
 
 
 
+
 <h2 class="mb-5">Listado de citas</h2>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                <input type="text" [(ngModel)]="filterValues.id" (input)="applyFilters()" placeholder="ID" />
+            </th>
+            <th>
+                <input type="text" [(ngModel)]="filterValues.place" (input)="applyFilters()" placeholder="LUGAR" />
+            </th>
+            <th>
+                <input type="text" [(ngModel)]="filterValues.treatment" (input)="applyFilters()" placeholder="TRATAMIENTO" />
+            </th>
+            <th (click)="sortColumnBy('date')" style="cursor: pointer;">
+                FECHA
+                <span *ngIf="sortColumn === 'date'">
+                    {{ sortDirection === 'asc' ? '▲' : '▼' }}
+                </span>
+                <input type="text" [(ngModel)]="filterValues.date" (input)="applyFilters()" placeholder="FECHA" />
+            </th>
+            <th (click)="sortColumnBy('hour')" style="cursor: pointer;">
+                HORA
+                <span *ngIf="sortColumn === 'hour'">
+                    {{ sortDirection === 'asc' ? '▲' : '▼' }}
+                </span>
+                <input type="text" [(ngModel)]="filterValues.hour" (input)="applyFilters()" placeholder="HORA" />
+            </th>
+            <th>
+                <input type="text" [(ngModel)]="filterValues.name" (input)="applyFilters()" placeholder="NOMBRE Y APELLIDO" />
+            </th>
+            <th>
+                <input type="text" [(ngModel)]="filterValues.phone" (input)="applyFilters()" placeholder="TELEFONO" />
+            </th>
+            <th>
+                <input type="text" [(ngModel)]="filterValues.email" (input)="applyFilters()" placeholder="EMAIL" />
+            </th>
+            <th>
+                <input type="text" [(ngModel)]="filterValues.patientId" (input)="applyFilters()" placeholder="ID PACIENTE" />
+            </th>
+            <th>ACCIONES</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let booking of filteredBookings; trackBy: trackById">
+            <td>{{ booking.id }}</td>
+            <td>{{ booking.place }}</td>
+            <td>{{ booking.treatment }}</td>
+            <td>{{ formatDate(booking.dateHour) }}</td>
+            <td>{{ formatHour(booking.dateHour) }}</td>
+            <td>{{ booking.patient.name }} {{ booking.patient.lastName }}</td>
+            <td>{{ booking.patient.cod }}{{ booking.patient.phone }}</td>
+            <td>{{ booking.patient.email }}</td>
+            <td>{{ booking.patient.id }}</td>
+            <td class="text-end">
+                <div class="btn-group">
+                    <button class="btn btn-primary" [routerLink]="[booking.id, 'edit']">
+                        Editar
+                    </button>
+                    <button class="btn btn-danger" (click)="deleteContact(booking)">
+                        Eliminar
+                    </button>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+<!--<h2 class="mb-5">Listado de citas</h2>
 
 <table class="table table-hover">
     <thead>
@@ -61,3 +137,4 @@
         }
     </tbody>
 </table>
+-->
