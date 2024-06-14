@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Contact } from '../model/contact.interface';
 import { ContactService } from './contact.service';
+import { Booking } from '../model/booking.interface';
 
 
 @Injectable({
@@ -69,6 +70,15 @@ export class ReservasService {
 //  getReservaData(): any {
 //    return this.reservaData;
 //  }
+
+list(){
+  return this.http.get<Booking[]>('http://localhost:8080/api/booking')
+}
+
+delete(id: number){
+  return this.http.delete<void>(`http://localhost:8080/api/booking/${id}`)
+}
+
 
 
 

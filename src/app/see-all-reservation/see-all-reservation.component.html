@@ -1,0 +1,63 @@
+
+<!-- // IMPRIMIR RESERVA
+<div @If(reserva)>
+    <h2>Reserva Creada</h2>
+    <p>Local: {{ reserva.local }}</p>
+    <p>Tratamiento: {{ reserva.tratamiento }}</p>
+    <p>Fecha y Hora: {{ reserva.fechaHora }}</p>
+  </div>
+-->
+
+
+
+<h2 class="mb-5">Listado de citas</h2>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>LUGAR</th>
+            <th>TRATAMIENTO</th>
+            <th>FECHA</th>
+            <th>HORA</th>
+            <th>NOMBRE Y APELLIDO</th>
+            <th>TELEFONO</th>
+            <th>EMAIL</th>
+            <th>ID PACIENTE</th>
+        
+        </tr>
+    </thead>
+    <tbody>
+        @for(booking of bookings; track booking.id){
+            <tr>
+                <td>{{ booking.id }}</td>
+                <td>{{ booking.place }}</td>
+                <td>{{ booking.treatment }}</td>
+                <td>{{ formatDate(booking.dateHour) }}</td>
+                
+
+
+                <td>{{ formatHour(booking.dateHour) }}</td> 
+
+
+                <td>{{ booking.patient.name }} {{ booking.patient.lastName }}</td>
+                <td>{{ booking.patient.cod }}{{ booking.patient.phone }}</td>
+                <td>{{ booking.patient.email }}</td>
+                <td>{{ booking.patient.id }}</td>
+                
+                
+                <td class="text-end">
+                    <div class="btn-group">
+                        <button class="btn btn-primary" [routerLink]="[booking.id,'edit']">
+                            Editar
+                        </button>
+                        <button class="btn btn-danger" (click)="deleteContact(booking)">
+                            Eliminar
+                        </button>
+                    </div>
+                    
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

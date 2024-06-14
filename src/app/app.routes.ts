@@ -27,4 +27,9 @@ export const routes: Routes = [
         path: 'contact-form/:id',
         loadComponent: () => import('./contact-form/contact-form.component').then(m => m.ContactFormComponent)
     },
+
+    {
+        path: 'ver-reservas',
+        loadComponent: () => import('./see-all-reservation/see-all-reservation.component').then(m => m.SeeAllReservationComponent)
+    },
 ];
