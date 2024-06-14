@@ -1,0 +1,19 @@
+<h2>Detalles de la Reserva</h2>
+<div *ngIf="reserva">
+  <p><strong>Local:</strong> {{ reserva.place }}</p>
+  <p><strong>Tratamiento:</strong> {{ reserva.treatment }}</p>
+  <p><strong>Fecha y Hora 2:</strong> {{ formatDate(reserva.dateHour) }}</p>
+  <p><strong>ID del Paciente:</strong> {{ patientId }}</p>
+<!--<p><strong>Nombre del Paciente:</strong> {{ patient.name }} {{ patient.lastName }}</p>-->
+
+
+</div>
+<div *ngIf="!reserva">
+  <p>No hay detalles de la reserva disponibles.</p>
+</div>
+
+
+
+
+
+

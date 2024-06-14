@@ -1,0 +1,43 @@
+<div>
+  <h2>Seleccione un Local</h2>
+  <select [(ngModel)]="localSeleccionado">
+    <option *ngFor="let local of locales" [value]="local.name">{{ local.name }}</option>
+  </select>
+</div>
+
+<div>
+  <h2>Seleccione un Tratamiento</h2>
+  <select [(ngModel)]="tratamientoSeleccionado">
+    <option *ngFor="let tratamiento of tratamientos" [value]="tratamiento.name">{{ tratamiento.name }}</option>
+  </select>
+</div>
+
+<div>
+  <button (click)="onBuscarHorarios()">Buscar Horarios Disponibles</button>
+</div>
+
+<!--
+<div *ngIf="horarios.length > 0">
+  <h2>Horarios Disponibles</h2>
+  <ul>
+    <li *ngFor="let horario of horarios">{{ horario }}</li>
+  </ul>
+</div>
+-->
+
+<div *ngIf="horarios.length > 0">
+  <h2>Horarios Disponibles</h2>
+  <ul>
+    <li *ngFor="let horario of horarios">
+      <input type="radio" name="horario" [(ngModel)]="horarioSeleccionado" [value]="horario"> {{ horario }}
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="horarioSeleccionado">
+  <button (click)="onReservarHorario()">Reservar este horario</button>
+</div>
+
+<div>
+  <button (click)="onEditarContacto()">Editar Contacto</button>
+</div>

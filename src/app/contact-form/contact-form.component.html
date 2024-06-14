@@ -1,0 +1,103 @@
+<div class="text-end">
+    <button class="btn btn-danger" routerLink="/citas">
+        Administrador
+    </button>
+</div>
+
+
+<div class="container mt-5">
+    <h1>
+        @if (contac) {
+            Editar
+        } @else {
+            Registra tu
+        }
+        Cita
+    </h1>
+
+    @if(form) {
+        
+        @if(errors.length) {
+            <div class="alert alert-danger">
+                <p>Errores: </p> 
+                <ul>
+                        @for(error of errors; track error) {
+                            <li>{{ error }}</li>
+                        }
+                   
+                </ul>
+    
+            </div>
+        }
+
+
+
+        <form [formGroup]="form" (ngSubmit)="save()">
+            <div class="form-group">
+                <label for="name">Nombre</label>
+                <input id="name" type="text" placeholder="Nombre" class="form-control" formControlName="name">
+
+                @if (form.get('name')?.hasError('required') && form.get('name')?.touched) {
+                    <p class="invalid-feedback d-block"> El nombre es obligatorio</p>
+                }
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Apellido</label>
+                <input id="lastName" type="text" placeholder="Apellido" class="form-control" formControlName="lastName">
+
+                @if (form.get('lastName')?.hasError('required') && form.get('lastName')?.touched) {
+                    <p class="invalid-feedback d-block"> El apellido es obligatorio</p>
+                }
+            </div>
+    
+    
+            <div class="form-row">
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="cod">Cod. de area</label>
+                        <input id="cod" type="text" placeholder="EJ: 351" class="form-control" formControlName="cod">
+                        @if (form.get('cod')?.hasError('required') && form.get('cod')?.touched) {
+                            <p class="invalid-feedback d-block"> El codigo de area es obligatorio</p>
+                        }
+                    </div>
+                    <div class="form-group col-md-8">
+                        <label for="phone">Telefono</label>
+                        <input id="phone" type="text" placeholder="Sin 15" class="form-control" formControlName="phone">
+                        @if (form.get('phone')?.hasError('required') && form.get('phone')?.touched) {
+                            <p class="invalid-feedback d-block"> El telefono de contacto es obligatorio</p>
+                        }
+                    </div>
+                </div>
+    
+            </div>
+    
+    
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input id="email" type="text" placeholder="email@email" class="form-control" formControlName="email">
+                @if (form.get('email')?.hasError('required') && form.get('email')?.touched) {
+                    <p class="invalid-feedback d-block"> El email es obligatorio</p>
+                }
+                @if (form.get('email')?.hasError('email')) {
+                    <p class="invalid-feedback d-block"> El email es invalido</p>
+                }
+            </div>
+    
+    
+            <div class="text-end mt-3">
+                <button type="button" class="btn btn-light" routerLink="/">
+                    Cancelar
+                </button>
+                <button class="btn btn-primary ms-2">
+                    @if (contac) {
+                        Actualizar
+                    } @else {
+                        Crear
+                    }
+                    cita
+                </button>
+            </div>
+        </form>
+    }
+</div>

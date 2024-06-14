@@ -1,0 +1,52 @@
+
+<!-- // IMPRIMIR RESERVA
+<div @If(reserva)>
+    <h2>Reserva Creada</h2>
+    <p>Local: {{ reserva.local }}</p>
+    <p>Tratamiento: {{ reserva.tratamiento }}</p>
+    <p>Fecha y Hora: {{ reserva.fechaHora }}</p>
+  </div>
+-->
+
+
+
+<h2 class="mb-5">Listado de citas</h2>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>NOMBRE</th>
+            <th>APELLIDO</th>
+            <th>COD</th>
+            <th>TELEFONO</th>
+            <th>EMAIL</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @for(contact of contacts; track contact.id){
+            <tr>
+                <td>{{ contact.id }}</td>
+                <td>{{ contact.name }}</td>
+                <td>{{ contact.lastName }}</td>
+                <td>{{ contact.cod }}</td>
+                <td>{{ contact.phone }}</td>
+                <td>{{ contact.email }}</td>
+                
+                
+                <td class="text-end">
+                    <div class="btn-group">
+                        <button class="btn btn-primary" [routerLink]="[contact.id,'edit']">
+                            Editar
+                        </button>
+                        <button class="btn btn-danger" (click)="deleteContact(contact)">
+                            Eliminar
+                        </button>
+                    </div>
+                    
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
