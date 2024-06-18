@@ -130,13 +130,89 @@ export class BookingCreateComponent implements OnInit{
       });
     }
   }
+
+
+
+
+
+
+
+
+  save(callback?: () => void) {
+    if (this.form?.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+  
+    const bookingForm = this.form!.value;
+    let request: Observable<any>;
+  
+    if (this.booking) {
+      const { place, treatment, dateHour } = bookingForm;
+      const updatedBooking = {
+        place,
+        treatment,
+        dateHour: [dateHour], // Enviar dateHour como una lista
+        patientId: this.booking.patient.id, // Utiliza el ID del paciente existente
+      };
+      request = this.bookingService.update(this.booking.id, updatedBooking);
+    } else {
+      const newBooking = {
+        place: bookingForm.place,
+        treatment: bookingForm.treatment,
+        dateHour: [bookingForm.dateHour], // Enviar dateHour como una lista
+      };
+      request = this.bookingService.create(newBooking);
+    }
+  
+    request.subscribe({
+      next: (booking) => {
+        this.errors = [];
+        if (callback) {
+          callback();
+        } else {
+          this.router.navigate(['/ver-reservas']);
+        }
+      },
+      error: response => {
+        this.errors = response.error.errors;
+        console.log('response', response.error.errors);
+      }
+    });
+  }
+  
+  onEditarContacto(): void {
+    const idPatient = this.form?.get('idPatient')?.value;
+    if (idPatient) {  
+      this.save(() => {
+        this.router.navigate(['/contact-form-booking', idPatient]);
+      });
+    } else {
+      console.error('Patient ID is null or undefined');
+    }
+  }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
 
 
 
 
   
-
+/*
 save() {
   if (this.form?.invalid) {
     this.form.markAllAsTouched();
@@ -182,12 +258,15 @@ save() {
 onEditarContacto(): void {
   const idPatient = this.form?.get('idPatient')?.value;
   if (idPatient) {  
-    this.save;
+
+    this.save();
+
     this.router.navigate(['/contact-form-booking', idPatient]);
   } else {
     console.error('Patient ID is null or undefined');
   }
 }
+  */
   
 
 }
