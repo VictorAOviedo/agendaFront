@@ -32,4 +32,16 @@ export const routes: Routes = [
         path: 'ver-reservas',
         loadComponent: () => import('./see-all-reservation/see-all-reservation.component').then(m => m.SeeAllReservationComponent)
     },
+    {
+        path: 'crear-reservas',
+        loadComponent: () => import('./booking-create/booking-create.component').then(m => m.BookingCreateComponent)
+    },
+    {
+        path: 'ver-reservas/:id/edit',
+        loadComponent: () => import('./booking-create/booking-create.component').then(m => m.BookingCreateComponent)
+    },
+    {
+        path: 'contact-form-booking/:id',
+        loadComponent: () => import('./booking-patient-update/booking-patient-update.component').then(m => m.BookingPatientUpdateComponent)
+    },
 ];

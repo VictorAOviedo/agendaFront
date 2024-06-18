@@ -1,0 +1,130 @@
+<div class="text-end">
+    <button class="btn btn-danger" routerLink="/citas">
+      Administrador
+    </button>
+  </div>
+  
+  <div class="container mt-5">
+    <h1>
+      {{ booking ? 'Editar' : 'Registra tu' }} Cita
+    </h1>
+  
+    <div *ngIf="form">
+      <div *ngIf="errors.length" class="alert alert-danger">
+        <p>Errores:</p>
+        <ul>
+          <li *ngFor="let error of errors">{{ error }}</li>
+        </ul>
+      </div>
+  
+      <form [formGroup]="form" (ngSubmit)="save()">
+
+        <div class="form-group">
+            <label for="place">Lugar</label>
+            <select id="place" class="form-control" formControlName="place" (change)="onBuscarHorarios()">
+              <option value="" disabled>Seleccione un lugar</option>
+              <option *ngFor="let local of locales" [value]="local.name">{{ local.name }}</option>
+            </select>
+            <p *ngIf="form.get('place')?.hasError('required') && form.get('place')?.touched" class="invalid-feedback d-block">
+              El lugar es obligatorio
+            </p>
+          </div>
+          
+          <div class="form-group">
+            <label for="treatment">Tratamiento</label>
+            <select id="treatment" class="form-control" formControlName="treatment" (change)="onBuscarHorarios()">
+              <option value="" disabled>Seleccione un tratamiento</option>
+              <option *ngFor="let tratamiento of tratamientos" [value]="tratamiento.name">{{ tratamiento.name }}</option>
+            </select>
+            <p *ngIf="form.get('treatment')?.hasError('required') && form.get('treatment')?.touched" class="invalid-feedback d-block">
+              El tratamiento es obligatorio
+            </p>
+          </div>
+          
+          
+  
+        <div class="form-group">
+          <label for="dateHour">Fecha y Hora</label>
+          <select id="dateHour" class="form-control" formControlName="dateHour">
+            <option value="" disabled>Seleccione una fecha y hora</option>
+            <option *ngFor="let horario of horarios" [value]="horario">{{ horario }}</option>
+          </select>
+          <p *ngIf="form.get('dateHour')?.hasError('required') && form.get('dateHour')?.touched" class="invalid-feedback d-block">La fecha y hora es obligatoria</p>
+        </div>
+  
+        <div class="form-group">
+            <label for="idPatient">ID de Paciente</label>
+            <span id="idPatient" class="form-control-plaintext">{{ form.get('idPatient')?.value || 'ID Paciente' }}</span>
+            <p *ngIf="form.get('idPatient')?.hasError('required') && form.get('idPatient')?.touched" class="invalid-feedback d-block">El nombre del paciente es obligatorio</p>
+        </div>
+          
+          <!-- Botón para actualizar paciente -->
+          <div class="text-end">
+            <button type="button" class="btn btn-secondary" (click)="onEditarContacto()">
+              Actualizar Paciente
+            </button>
+          </div>
+          
+
+
+        <div class="form-group">
+            <label for="namePatient">Nombre de Paciente</label>
+            <span id="namePatient" class="form-control-plaintext">{{ form.get('namePatient')?.value || 'Nombre de Paciente' }}</span>
+            <p *ngIf="form.get('namePatient')?.hasError('required') && form.get('namePatient')?.touched" class="invalid-feedback d-block">El nombre del paciente es obligatorio</p>
+        </div>
+        
+    
+        <div class="form-group">
+            <label for="lastNamePatient">Apellido del Paciente</label>
+            <span id="lastNamePatient" class="form-control-plaintext">{{ form.get('lastNamePatient')?.value || 'Apellido del Paciente' }}</span>
+            <p *ngIf="form.get('lastNamePatient')?.hasError('required') && form.get('lastNamePatient')?.touched" class="invalid-feedback d-block">El nombre del paciente es obligatorio</p>
+        </div>
+        
+    
+          <div class="form-row">
+            <div class="row">
+              <div class="form-group col-md-4">
+                <label for="codPatient">Codigo de area</label>
+                <span id="codPatient" class="form-control-plaintext">{{ form.get('codPatient')?.value || 'Codigo de area' }}</span>
+                <p *ngIf="form.get('codPatient')?.hasError('required') && form.get('codPatient')?.touched" class="invalid-feedback d-block">El nombre del paciente es obligatorio</p>
+              </div>
+    
+              <div class="form-group col-md-4">
+                <label for="phonePatient">Telefono</label>
+                <span id="phonePatient" class="form-control-plaintext">{{ form.get('phonePatient')?.value || 'Telefono' }}</span>
+                <p *ngIf="form.get('phonePatient')?.hasError('required') && form.get('phonePatient')?.touched" class="invalid-feedback d-block">El nombre del paciente es obligatorio</p>
+              </div>
+    
+              <div class="form-group col-md-4">
+                <label for="emailPatient">Email</label>
+                <span id="emailPatient" class="form-control-plaintext">{{ form.get('emailPatient')?.value || 'email@email' }}</span>
+                <p *ngIf="form.get('emailPatient')?.hasError('required') && form.get('emailPatient')?.touched" class="invalid-feedback d-block">El email es obligatorio</p>
+                <p *ngIf="form.get('emailPatient')?.hasError('email')" class="invalid-feedback d-block">El email es inválido</p>
+            </div>
+            
+
+
+          </div>
+        </div>
+
+
+        
+  
+        <div class="text-end mt-3">
+          <button type="button" class="btn btn-light" routerLink="/ver-reservas">
+            Cancelar
+          </button>
+          <button type="submit" class="btn btn-primary ms-2">
+            {{ booking ? 'Actualizar' : 'Crear' }} cita
+          </button>
+        </div>
+      </form>
+
+       
+
+    </div>
+  </div>
+
+  
+  
+  

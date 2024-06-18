@@ -20,7 +20,7 @@ export class ContactService {
   get(id: number){
     return this.http.get<Contact>(`http://localhost:8080/patient/${id}`)
   }
-
+ 
   create(contact: Contact){
     return this.http.post<Contact>('http://localhost:8080/patient', contact)
   }

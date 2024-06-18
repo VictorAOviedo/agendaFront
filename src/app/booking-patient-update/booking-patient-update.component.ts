@@ -1,19 +1,19 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { ContactService } from '../service/contact.service';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Router, ActivatedRoute, RouterModule } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Contact } from '../model/contact.interface';
-import { Observable, Subject } from 'rxjs';
-import { CommonModule } from '@angular/common';
+import { ContactService } from '../service/contact.service';
 
 @Component({
-  selector: 'app-contact-form',
+  selector: 'app-booking-patient-update',
   standalone: true,
   imports: [RouterModule, ReactiveFormsModule],
-  templateUrl: './contact-form.component.html',
-  styleUrl: './contact-form.component.css'
+  templateUrl: './booking-patient-update.component.html',
+  styleUrl: './booking-patient-update.component.css'
 })
-export class ContactFormComponent implements OnInit {
+export class BookingPatientUpdateComponent implements OnInit{
+
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
@@ -97,7 +97,7 @@ export class ContactFormComponent implements OnInit {
           next: (contact) => {
             this.errors = [];
             this.contactService.setContactId(contact.id);  // Aquí se almacena el ID del paciente
-            this.router.navigate(['/lugar']);
+            this.router.navigate(['/ver-reservas']);
           },
           error: response => {
             this.errors = response.error.errors;
@@ -108,4 +108,5 @@ export class ContactFormComponent implements OnInit {
 
    
   }
+
 }
